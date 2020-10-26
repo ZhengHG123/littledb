@@ -104,6 +104,9 @@ MetaCommandResult do_meta_command(InputBuffer* input_buffer){
         return META_COMMAND_UNRECONIZED_COMMAND;
     }
 }//a wrapper for existing functionality that leaves room for more commands.
+void print_row(Row* row){
+    std::cout<<"( "<<row->id<<" "<<row->username<<" "<<row->email<<")"<<std::endl;
+}
 PrepareResult prepare_statement(InputBuffer* input_buffer,Statement* statement){
     if(strncmp(input_buffer->buffer,"insert",6)==0){
         statement->type=STATEMENT_INSERT;
@@ -191,7 +194,15 @@ int main() {
                 continue;
         }
 
-        execute_statement(&statement);
+        //execute_statement(&statement);
+        switch (execute_statement(&statement,table)) {
+            case (EXECUTE_SUCCESS):
+                printf("Executed.\n");
+                break;
+            case (EXECUTE_TABLE_FULL):
+                printf("Error:Table full.\n");
+                break;
+        }
     }
     return 0;
 }
