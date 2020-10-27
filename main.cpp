@@ -105,7 +105,7 @@ MetaCommandResult do_meta_command(InputBuffer* input_buffer){
     }
 }//a wrapper for existing functionality that leaves room for more commands.
 void print_row(Row* row){
-    std::cout<<"( "<<row->id<<" "<<row->username<<" "<<row->email<<")"<<std::endl;
+    std::cout<<"||"<<row->id<<"|"<<row->username<<"|"<<row->email<<"||"<<std::endl;
 }
 PrepareResult prepare_statement(InputBuffer* input_buffer,Statement* statement){
     if(strncmp(input_buffer->buffer,"insert",6)==0){
