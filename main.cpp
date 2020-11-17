@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstring>//#include <string.h>
+#include <time.h>
 #define COLUMN_USERNAME_SIZE 32
 #define COLUMN_EMAIL_SIZE 255
 
@@ -190,7 +191,8 @@ int main() {
     while(true){
         print_prompt();
         read_input(input_buffer);
-
+        clock_t start,finish;
+        start = clock();
         if(input_buffer->buffer[0]=='.'){
             switch(do_meta_command(input_buffer)) {
                 case (META_COMMAND_SUCCESS):
@@ -228,6 +230,9 @@ int main() {
                 printf("Error:Table full.\n");
                 break;
         }
+        finish=clock();
+        double duration=(double)(finish-start)/CLOCKS_PER_SEC;
+        printf("(%f sec)\n", duration);
     }
     return 0;
 }
